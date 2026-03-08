@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer require spatie/laravel-model-states)",
+      "Bash(php artisan migrate --force)",
+      "Bash(php artisan test --filter=\"Vendor\")",
+      "Bash(php artisan test --filter=\"Billing\")",
+      "Bash(php artisan test --filter=\"Workflow\")",
+      "Bash(php artisan test)"
+    ]
+  }
+}

@@ -6,3 +6,5 @@ pest()->extend(Tests\TestCase::class)
     ->in('Feature');
 
 uses(RefreshDatabase::class)->in('Feature/Billing');
+uses(RefreshDatabase::class)->in('Feature/Vendor');
+uses(RefreshDatabase::class)->in('Feature/Workflow');
