@@ -74,7 +74,8 @@ it('creates step run records for each step executed', function () {
         ->and($stepRuns[0]->status)->toBe(WorkflowStepStatus::Completed)
         ->and($stepRuns[0]->ran_at)->not->toBeNull()
         ->and($stepRuns[1]->status)->toBe(WorkflowStepStatus::Completed)
-        ->and($stepRuns[1]->output)->toBe(['channel' => 'mail', 'deferred' => true]);
+        ->and($stepRuns[1]->output['channel'])->toBe('mail')
+        ->and($stepRuns[1]->output)->toHaveKey('notification_id');
 });
 
 it('marks the run and the failing step as failed when a step throws', function () {

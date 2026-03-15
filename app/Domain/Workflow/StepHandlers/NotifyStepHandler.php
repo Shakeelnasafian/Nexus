@@ -3,17 +3,31 @@
 namespace App\Domain\Workflow\StepHandlers;
 
 use App\Domain\Workflow\Contracts\StepHandler;
+use App\Domain\Workflow\Jobs\SendWorkflowNotification;
+use App\Domain\Workflow\Models\WorkflowNotification;
 use App\Domain\Workflow\Models\WorkflowStepRun;
 
 class NotifyStepHandler implements StepHandler
 {
     public function handle(WorkflowStepRun $stepRun): void
     {
-        // Notification delivery will be implemented in the Accountability integration session.
-        // For now the step records its intent so the run history is complete.
+        $payload = $stepRun->workflowStep->payload ?? [];
+        $run = $stepRun->workflowRun;
+
+        $notification = WorkflowNotification::withoutGlobalScopes()->create([
+            'tenant_id' => $run->tenant_id,
+            'workflow_run_id' => $run->id,
+            'workflow_step_run_id' => $stepRun->id,
+            'channel' => $payload['channel'] ?? 'default',
+            'message' => $payload['message'] ?? null,
+            'payload' => $payload,
+        ]);
+
+        SendWorkflowNotification::dispatch($notification->id);
+
         $stepRun->output = [
-            'channel' => $stepRun->workflowStep->payload['channel'] ?? 'default',
-            'deferred' => true,
+            'notification_id' => $notification->id,
+            'channel' => $notification->channel,
         ];
     }
 }
