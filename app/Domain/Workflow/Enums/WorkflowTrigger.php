@@ -10,4 +10,6 @@ enum WorkflowTrigger: string
     case ContractActivated = 'contract.activated';
     case SubscriptionCancelled = 'subscription.cancelled';
     case PaymentFailed = 'subscription.payment_failed';
+    case SlaBreached = 'sla.breached';
+    case ObjectiveCompleted = 'objective.completed';
 }

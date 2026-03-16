@@ -2,6 +2,8 @@
 
 namespace App\Domain\Workflow\Providers;
 
+use App\Domain\Accountability\Events\ObjectiveCompleted;
+use App\Domain\Accountability\Events\SlaBreached;
 use App\Domain\Billing\Events\PaymentFailed;
 use App\Domain\Billing\Events\SubscriptionCancelled;
 use App\Domain\Vendor\Events\ContractActivated;
@@ -92,6 +94,29 @@ class WorkflowServiceProvider extends ServiceProvider
                 triggerPayload: [
                     'failed_at' => $event->failedAt->toIso8601String(),
                     'reason' => $event->reason,
+                ],
+            );
+        });
+
+        Event::listen(SlaBreached::class, function (SlaBreached $event): void {
+            app(TriggerWorkflow::class)->execute(
+                tenantId: $event->tenantId,
+                triggerEvent: WorkflowTrigger::SlaBreached->value,
+                triggerPayload: [
+                    'sla_record_id' => $event->slaRecordId,
+                    'vendor_id' => $event->vendorId,
+                    'title' => $event->title,
+                ],
+            );
+        });
+
+        Event::listen(ObjectiveCompleted::class, function (ObjectiveCompleted $event): void {
+            app(TriggerWorkflow::class)->execute(
+                tenantId: $event->tenantId,
+                triggerEvent: WorkflowTrigger::ObjectiveCompleted->value,
+                triggerPayload: [
+                    'objective_id' => $event->objectiveId,
+                    'title' => $event->title,
                 ],
             );
         });
