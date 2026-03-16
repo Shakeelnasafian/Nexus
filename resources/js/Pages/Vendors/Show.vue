@@ -62,14 +62,3 @@ const act = (action) => actionForm.post(`/vendors/${props.vendor.id}/${action}`)
         </div>
     </div>
 </template>
-
-<style>
-.th { @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider; }
-.td { @apply px-6 py-4 text-sm; }
-.badge { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium; }
-.link { @apply text-indigo-600 hover:text-indigo-800 font-medium; }
-.btn-primary   { @apply inline-flex items-center px-3 py-1.5 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors; }
-.btn-success   { @apply inline-flex items-center px-3 py-1.5 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors; }
-.btn-warning   { @apply inline-flex items-center px-3 py-1.5 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-colors; }
-.btn-danger    { @apply inline-flex items-center px-3 py-1.5 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors; }
-</style>

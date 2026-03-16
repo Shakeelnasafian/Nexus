@@ -32,11 +32,3 @@ const submit = () => form.post('/objectives');
         </form>
     </div>
 </template>
-
-<style>
-.label  { @apply block text-sm font-medium text-gray-700 mb-1; }
-.input  { @apply block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500; }
-.error  { @apply mt-1 text-sm text-red-600; }
-.btn-primary   { @apply inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50; }
-.btn-secondary { @apply inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors; }
-</style>

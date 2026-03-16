@@ -41,8 +41,3 @@ const act = (action) => form.post(`/contracts/${props.contract.id}/${action}`);
         </dl>
     </div>
 </template>
-
-<style>
-.btn-success { @apply inline-flex items-center px-3 py-1.5 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors; }
-.btn-danger  { @apply inline-flex items-center px-3 py-1.5 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors; }
-</style>

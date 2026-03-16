@@ -68,9 +68,3 @@ defineProps({ workflow: Object, runs: Array });
         </div>
     </div>
 </template>
-
-<style>
-.th    { @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider; }
-.td    { @apply px-6 py-4 text-sm; }
-.badge { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium; }
-</style>

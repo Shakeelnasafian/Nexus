@@ -52,12 +52,3 @@ const statusColor = (status) => ({
         </div>
     </div>
 </template>
-
-<style>
-.th { @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider; }
-.td { @apply px-6 py-4 text-sm; }
-.badge { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize; }
-.btn-primary    { @apply inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors; }
-.btn-sm-success { @apply inline-flex items-center px-2.5 py-1 bg-green-600 text-white text-xs font-medium rounded hover:bg-green-700 transition-colors; }
-.btn-sm-danger  { @apply inline-flex items-center px-2.5 py-1 bg-red-600 text-white text-xs font-medium rounded hover:bg-red-700 transition-colors; }
-</style>
