@@ -14,7 +14,6 @@ class WorkflowNotification extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'tenant_id',
         'workflow_run_id',
         'workflow_step_run_id',
         'channel',

@@ -15,7 +15,6 @@ class Workflow extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'tenant_id',
         'name',
         'trigger_event',
         'is_active',

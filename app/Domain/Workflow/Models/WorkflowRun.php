@@ -16,7 +16,6 @@ class WorkflowRun extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'tenant_id',
         'workflow_id',
         'trigger_event',
         'trigger_payload',

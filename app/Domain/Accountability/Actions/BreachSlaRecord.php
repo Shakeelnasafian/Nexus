@@ -11,6 +11,10 @@ class BreachSlaRecord
 {
     public function execute(SlaRecord $record): void
     {
+        if ($record->status !== SlaStatus::Active) {
+            return;
+        }
+
         $record->status = SlaStatus::Breached;
         $record->breached_at = now();
         $record->save();

@@ -16,19 +16,29 @@ class MarkOverdueSlaRecords extends Command
 
     public function handle(BreachSlaRecord $action): int
     {
-        $cutoff = now()->subDays((int) $this->option('days'));
+        $days = (int) $this->option('days');
 
-        $records = SlaRecord::withoutGlobalScopes()
-            ->where('status', SlaStatus::Active)
-            ->where('started_at', '<=', $cutoff)
-            ->get();
+        if ($days <= 0) {
+            $this->error('The --days option must be a positive integer.');
 
-        foreach ($records as $record) {
-            $action->execute($record);
-            $this->line("Breached SLA record #{$record->id}: {$record->title}");
+            return self::FAILURE;
         }
 
-        $this->info("Done. {$records->count()} SLA record(s) breached.");
+        $cutoff = now()->subDays($days);
+        $breached = 0;
+
+        SlaRecord::withoutGlobalScopes()
+            ->where('status', SlaStatus::Active)
+            ->where('started_at', '<=', $cutoff)
+            ->chunk(200, function ($records) use ($action, &$breached): void {
+                foreach ($records as $record) {
+                    $action->execute($record);
+                    $this->line("Breached SLA record #{$record->id}: {$record->title}");
+                    $breached++;
+                }
+            });
+
+        $this->info("Done. {$breached} SLA record(s) breached.");
 
         return self::SUCCESS;
     }
