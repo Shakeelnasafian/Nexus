@@ -14,7 +14,7 @@ class NotifyStepHandler implements StepHandler
         $payload = $stepRun->workflowStep->payload ?? [];
         $run = $stepRun->workflowRun;
 
-        $notification = WorkflowNotification::withoutGlobalScopes()->create([
+        $notification = (new WorkflowNotification)->forceFill([
             'tenant_id' => $run->tenant_id,
             'workflow_run_id' => $run->id,
             'workflow_step_run_id' => $stepRun->id,
@@ -22,6 +22,7 @@ class NotifyStepHandler implements StepHandler
             'message' => $payload['message'] ?? null,
             'payload' => $payload,
         ]);
+        $notification->save();
 
         SendWorkflowNotification::dispatch($notification->id);
 

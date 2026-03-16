@@ -13,7 +13,7 @@ class OpenSlaRecord
         string $title,
         ?int $contractId = null,
     ): SlaRecord {
-        return SlaRecord::withoutGlobalScopes()->create([
+        $record = (new SlaRecord)->forceFill([
             'tenant_id' => $tenantId,
             'vendor_id' => $vendorId,
             'contract_id' => $contractId,
@@ -21,5 +21,8 @@ class OpenSlaRecord
             'status' => SlaStatus::Active,
             'started_at' => now(),
         ]);
+        $record->save();
+
+        return $record;
     }
 }

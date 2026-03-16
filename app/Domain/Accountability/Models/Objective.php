@@ -14,7 +14,6 @@ class Objective extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'tenant_id',
         'title',
         'description',
         'due_date',

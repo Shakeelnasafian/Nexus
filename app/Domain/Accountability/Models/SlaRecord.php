@@ -15,7 +15,6 @@ class SlaRecord extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'tenant_id',
         'vendor_id',
         'contract_id',
         'title',

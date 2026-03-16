@@ -26,13 +26,14 @@ class TriggerWorkflow
             ->get();
 
         foreach ($workflows as $workflow) {
-            $run = WorkflowRun::withoutGlobalScopes()->create([
+            $run = (new WorkflowRun)->forceFill([
                 'tenant_id' => $tenantId,
                 'workflow_id' => $workflow->id,
                 'trigger_event' => $triggerEvent,
                 'trigger_payload' => $triggerPayload,
                 'status' => WorkflowRunStatus::Pending,
             ]);
+            $run->save();
 
             RunWorkflowJob::dispatch($run->id);
         }
